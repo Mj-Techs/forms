@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.js"></script>
+
+    <script type="text/babel">
+      const rootHandle = document.getElementById("root");
+
+      /* 
+        1. Create a UserInfo Component
+        2.Have two Input fields
+            * username
+            * bio   
+        3.what the user types, display in a heading and paragraph tag.
+      */
+      const { useState } = React;
+
+      function UserInfo(props) {
+        const [username, setUsername] = useState("");
+        const [bio, setBio] = useState("");
+        const handleUsername = (e) => {
+          const usernameInput = e.target.value;
+          setUsername(usernameInput);
+        };
+        const handleBio = (e) => {
+          const bioInut = e.target.value;
+          setBio(bioInut);
+        };
+        return (
+          <div>
+            <h1>{username}</h1>
+            <p>{bio}</p>
+            <form>
+              <label>Username</label> <br />
+              <input type="text" value={username} onChange={handleUsername} />
+              <br />
+              <label>Bio</label> <br />
+              <textarea
+                value={bio}
+                onChange={handleBio}
+                cols="30"
+                rows="10"
+              ></textarea>
+            </form>
+          </div>
+        );
+      }
+      ReactDOM.render(<UserInfo />, rootHandle);
+    </script>
+  </body>
+</html>
