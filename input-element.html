@@ -13,6 +13,22 @@
 
     <script type="text/babel">
       const rootHandle = document.getElementById("root");
+
+      const { useState } = React;
+
+      function SearchBox(props) {
+        const [search, setSearch] = useState("");
+        const handleSearch = (e) => {
+          const result = e.target.value;
+          setSearch(result);
+        };
+        return (
+          <div>
+            <input type="text" value={search} onChange={handleSearch} />
+          </div>
+        );
+      }
+      ReactDOM.render(<SearchBox />, rootHandle);
     </script>
   </body>
 </html>
