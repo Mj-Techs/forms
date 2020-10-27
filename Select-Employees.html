@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/babel-standalone@6.26.0/babel.js"
+    ></script>
+
+    <script type="text/babel">
+      const rootHandle = document.getElementById("root");
+      const { useState } = React;
+      const users = [
+        { id: 1, name: "emp11", email: "emp11@gmail.com", selected: false },
+
+        { id: 2, name: "emp12", email: "emp12@gmail.com", selected: false },
+
+        { id: 3, name: "emp13", email: "emp13@gmail.com", selected: false },
+
+        { id: 4, name: "emp14", email: "emp14@gmail.com", selected: false },
+      ];
+      function EmployeeStatus(props) {
+        const [userList, setUsers] = useState(users);
+        const handleSelectedChange = (id) => {
+          const newUserList = [...userList];
+          const updatedUser = newUserList.map((ele) => {
+            if (ele.id === id) {
+              return { ...ele, ...{ selected: !ele.selected } };
+            } else {
+              return ele;
+            }
+          });
+          setUsers(updatedUser);
+        };
+
+        return (
+          <div>
+            <h2>Listing Employees - {userList.length}</h2>
+            <table border="2">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>name</th>
+                  <th>action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {userList.map((ele) => {
+                  return (
+                    <tr key={ele.id}>
+                      <td>{ele.id}</td>
+                      <td>{ele.name}</td>
+                      <td>
+                        <input
+                          type="checkbox"
+                          checked={ele.selected}
+                          onChange={() => {
+                            handleSelectedChange(ele.id);
+                          }}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            <h2>Selected Employees</h2>
+            <ul>
+              {userList.map((ele) => {
+                if (ele.selected) {
+                  return <li key={ele.id}>{ele.name}</li>;
+                }
+              })}
+            </ul>
+          </div>
+        );
+      }
+      ReactDOM.render(<EmployeeStatus />, rootHandle);
+    </script>
+  </body>
+</html>
