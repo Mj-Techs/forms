@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/babel-standalone@6.26.0/babel.js"
+    ></script>
+    <script type="text/babel">
+      const rootHandle = document.getElementById("root");
+      const { useState } = React;
+      function BillPayment(props) {
+        const [company, setCompany] = useState("vodafone");
+        const placeholder = `enter your ${company} number`;
+        const handleCompanyChange = (e) => {
+          const companyInput = e.target.value;
+          setCompany(companyInput);
+        };
+        return (
+          <div>
+            <h1>pay bill for {company}</h1>
+            <hr />
+            <form>
+              <input
+                type="radio"
+                name="company"
+                value="vodafone"
+                checked={company === "vodafone"}
+                onChange={handleCompanyChange}
+              />
+              vodafone <br />
+              <input
+                type="radio"
+                name="company"
+                value="airtel"
+                checked={company === "airtel"}
+                onChange={handleCompanyChange}
+              />
+              airtel <br />
+              <input
+                type="radio"
+                name="company"
+                value="jio"
+                checked={company === "jio"}
+                onChange={handleCompanyChange}
+              />
+              jio <br />
+              <input type="text" placeholder={placeholder} />
+            </form>
+          </div>
+        );
+      }
+      ReactDOM.render(<BillPayment />, rootHandle);
+    </script>
+  </body>
+</html>
