@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/babel-standalone@6.26.0/babel.js"
+    ></script>
+    <script type="text/babel">
+      const rootHandle = document.getElementById("root");
+      const { useState } = React;
+      function MilesConverter(props) {
+        const [range, setRange] = useState(0);
+        const [kilometer, setKms] = useState(0);
+        const handleRangeChange = (e) => {
+          const rangeInput = e.target.value;
+          const kms = (rangeInput * 1.6).toFixed(2);
+          setKms(kms);
+          setRange(rangeInput);
+        };
+        return (
+          <div>
+            <h2>kms-{kilometer}</h2>
+            <h2>miles-{range}</h2>
+            <form>
+              <input
+                type="range"
+                value={range}
+                onChange={handleRangeChange}
+                min="0"
+                max="100"
+              />
+            </form>
+          </div>
+        );
+      }
+      ReactDOM.render(<MilesConverter />, rootHandle);
+    </script>
+  </body>
+</html>
