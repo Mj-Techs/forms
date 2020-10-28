@@ -35,8 +35,7 @@
       function EmployeeStatus(props) {
         const [userList, setUsers] = useState(users);
         const handleSelectedChange = (id) => {
-          const newUserList = [...userList];
-          const updatedUser = newUserList.map((ele) => {
+          const updatedUser = userList.map((ele) => {
             if (ele.id === id) {
               return { ...ele, ...{ selected: !ele.selected } };
             } else {
