@@ -30,11 +30,11 @@
         const vowels = "aeiou";
         const handleTextChange = (e) => {
           const textAreaInput = e.target.value;
+          setText(textAreaInput);
           const newWord = textAreaInput.split("").filter((char) => {
             return !vowels.includes(char.toLowerCase());
           });
           setWords(newWord.join(""));
-          setText(textAreaInput);
         };
         return (
           <div>

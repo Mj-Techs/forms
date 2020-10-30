@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/babel-standalone@6.26.0/babel.js"
+    ></script>
+
+    <script type="text/babel">
+      const rootHandle = document.getElementById("root");
+      const { useState } = React;
+      function TaskInfo(props) {
+        const [tasks, setTask] = useState([
+          { id: 1, title: "get the website live", completed: false },
+          { id: 2, title: "work on user validation", completed: false },
+          { id: 3, title: "Automate the deployment process", completed: false },
+        ]);
+        const [check, setCheck] = useState(false);
+        const handleChange = (e) => {
+          const status = e.target.checked;
+          const result = tasks.map((task) => {
+            if (status) {
+              return { ...task, ...{ completed: !task.completed } };
+            } else {
+              return { ...task, ...{ completed: false } };
+            }
+          });
+          setTask(result);
+          setCheck(status);
+        };
+        return (
+          <table border="3">
+            <thead>
+              <tr>
+                <th>
+                  <input
+                    type="checkbox"
+                    checked={check}
+                    onChange={handleChange}
+                  />
+                </th>
+                <th>Title</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tasks.map((task) => {
+                return (
+                  <tr key={task.id}>
+                    <td>
+                      <input type="checkbox" disabled={true} />
+                    </td>
+                    <td>{task.title}</td>
+                    <td>{task.completed ? "completed" : "pending"}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        );
+      }
+      function App() {
+        return (
+          <div>
+            <h2>Mark All As Complete</h2>
+            <TaskInfo />
+          </div>
+        );
+      }
+      ReactDOM.render(<App />, rootHandle);
+    </script>
+  </body>
+</html>
